@@ -1,76 +1,46 @@
-## Simulador de Maturação de Whisky
+# Simulador de Maturação de Whisky
 
-Este programa foi desenvolvido em **HTML e JavaScript** para simular o processo de maturação de um barril de whisky. O objetivo é estimar quanto volume será perdido por evaporação ao longo do tempo e qual será o valor final do whisky restante.
+## Descrição
+Esse simulador consiste em calcular a perda de volume na maturação do whisky ao longo do tempo devido à evaporação (conhecida como *angel’s share*), além de estimar o valor final do barril.
 
-### Funcionamento do Programa
+O simulador também demonstra o impacto de uma solução tecnológica capaz de reduzir essas perdas, permitindo visualizar o ganho financeiro ao longo dos anos.
 
-O usuário deve inserir algumas informações relacionadas ao processo de maturação:
+## Objetivo
+O objetivo do simluador é mostrar, de forma prática e visual, como o controle de variáveis ambientais pode reduzir perdas na maturação do whisky e gerar economia.
 
-* **Temperatura média (°C)** – influencia a velocidade do envelhecimento.
-* **Tempo de maturação (anos)** – período que o whisky ficará no barril.
-* **Volume inicial (litros)** – quantidade inicial de whisky no barril.
-* **Taxa de evaporação (% ao ano)** – porcentagem de líquido que evapora a cada ano.
-* **Valor por litro (R$)** – preço estimado do whisky por litro.
-* **Umidade do ambiente (%)** – influencia qual componente evapora mais (água ou álcool).
+## Funcionamento
 
-Após preencher os campos, o usuário clica no botão **"Calcular resultado"**. O JavaScript executa uma função que realiza os cálculos e mostra os resultados na tela.
+O usuário informa:
 
-### Cálculos Realizados
+- Tempo de maturação (anos)
+- Volume inicial (litros)
+- Taxa de evaporação (% ao ano)
+- Valor por litro (R$)
 
-O programa realiza quatro cálculos principais:
+Com base nesses dados, o simluador calcula:
 
-**1. Valor inicial do barril**
+### Cenário sem sistema
+- Volume final após evaporação
+- Valor final do barril
 
-Calcula o valor total do whisky antes da maturação.
+### Cenário com sistema
+- Redução da taxa de evaporação em **15%**
+- Novo volume final
+- Novo valor estimado
 
-Valor inicial = Volume inicial × Valor por litro
+### Economia
+- Diferença entre o valor final com e sem o sistema
 
----
+##  Lógica utilizada
 
-**2. Perda total por evaporação**
+A perda de volume é calculada com base na taxa de evaporação anual:
 
-Calcula quanto líquido evapora durante o período de maturação.
+## Tecnologias utilizadas
 
-Perda = Volume inicial × (Taxa de evaporação / 100) × Tempo
+- HTML5
+- CSS3
+- JavaScript
 
----
+## Conclusão
 
-**3. Volume final**
-
-Mostra quanto whisky ainda restará no barril após a evaporação.
-
-Volume final = Volume inicial − Perda
-
----
-
-**4. Valor final estimado**
-
-Calcula o valor do whisky restante após o processo de maturação.
-
-Valor final = Volume final × Valor por litro
-
----
-
-### Análise das Condições de Maturação
-
-Além dos cálculos, o programa também analisa **temperatura** e **umidade**, exibindo mensagens explicativas.
-
-**Temperatura**
-
-* Entre **15°C e 20°C** → considerada ideal para maturação.
-* Entre **10°C e 30°C** → aceitável.
-* Abaixo de **10°C** ou acima de **30°C** → condição ruim para maturação.
-
-**Umidade**
-
-* **55% a 70%** → evaporação equilibrada.
-* **Abaixo de 55%** → evapora mais água, aumentando o teor alcoólico.
-* **Acima de 70%** → evapora mais álcool, diminuindo o teor alcoólico.
-
-### Objetivo do Simulador
-
-O simulador demonstra de forma simples como fatores ambientais podem influenciar o envelhecimento do whisky em barris. Ele permite visualizar:
-
-* a perda de volume ao longo dos anos,
-* o impacto financeiro da evaporação,
-* e as condições ideais de maturação.
+O simulador evidencia que pequenas melhorias no controle do ambiente podem gerar ganhos financeiros significativos ao longo do tempo, tornando o processo de maturação mais eficiente.

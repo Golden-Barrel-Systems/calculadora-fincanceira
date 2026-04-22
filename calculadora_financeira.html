@@ -162,11 +162,6 @@
         <h1>Simulador de Maturação de Whisky</h1>
 
         <div class="input-group">
-            <label>Temperatura média (°C)</label>
-            <input type="number" id="input_temp" placeholder="Ex: 18">
-        </div>
-
-        <div class="input-group">
             <label>Tempo de maturação (anos)</label>
             <input type="number" id="input_tempo" placeholder="Ex: 10">
         </div>
@@ -186,11 +181,6 @@
             <input type="number" id="input_valor" placeholder="Ex: 150">
         </div>
 
-        <div class="input-group">
-            <label>Umidade do ambiente (%)</label>
-            <input type="number" id="input_umidade" placeholder="Ex: 65">
-        </div>
-
         <button onclick="calcular()">Calcular resultado</button>
 
         <div class="resultado resultado-vazio" id="div_resultado">
@@ -202,63 +192,49 @@
 
     <script>
 
-        function calcular() {
+    function calcular() {
 
-            let temp = Number(input_temp.value);
-            let tempo = Number(input_tempo.value);
-            let volume = Number(input_volume.value);
-            let taxa = Number(input_taxa.value);
-            let valor = Number(input_valor.value);
-            let umidade = Number(input_umidade.value);
+        let tempo = Number(input_tempo.value);
+        let volume = Number(input_volume.value);
+        let taxa = Number(input_taxa.value);
+        let valor = Number(input_valor.value);
 
-            let perda = volume * (taxa / 100) * tempo;
-            let volume_final = volume - perda;
+        // taxa reduzida (15% menos evaporação)
+        let taxa_reduzida = taxa * 0.85;
 
-            let valor_inicial = volume * valor;
-            let valor_final = volume_final * valor;
+        // SEM sistema
+        let perda_sem = volume * (taxa / 100) * tempo;
+        let volume_sem = volume - perda_sem;
+        let valor_sem = volume_sem * valor;
 
-            let msg_temp = "";
-            let msg_umidade = "";
+        // COM sistema
+        let perda_com = volume * (taxa_reduzida / 100) * tempo;
+        let volume_com = volume - perda_com;
+        let valor_com = volume_com * valor;
 
-            /* temperatura */
+        let valor_inicial = volume * valor;
 
-            if (temp >= 15 && temp <= 20) {
-                msg_temp = "Temperatura ideal para maturação.<br>";
-            }
-            else if (temp > 30 || temp < 10) {
-                msg_temp = "Temperatura ruim, maturação prejudicada.<br>";
-            }
-            else {
-                msg_temp = "Temperatura aceitável.<br>";
-            }
+        let economia = valor_com - valor_sem;
 
-            /* umidade */
+        div_resultado.classList.remove("resultado-vazio");
 
-            if (umidade >= 55 && umidade <= 70) {
-                msg_umidade = "Umidade moderada, evaporação equilibrada.<br>";
-            }
-            else if (umidade < 55) {
-                msg_umidade = "Umidade baixa, evapora mais água e aumenta o teor alcoólico.<br>";
-            }
-            else {
-                msg_umidade = "Umidade alta, evapora mais álcool e diminui o teor alcoólico.<br>";
-            }
-
-            div_resultado.classList.remove("resultado-vazio");
-            div_resultado.innerHTML = `
-                Valor inicial do barril: R$ ${valor_inicial.toFixed(2)} <br>
-                Volume final após ${tempo} anos: ${volume_final.toFixed(2)} L <br>
-                Valor final estimado: R$ ${valor_final.toFixed(2)} <br>
-                Perda total por evaporação: ${perda.toFixed(2)} L
-            `;
-
-            div_mensagem.style.display = "block";
-            div_mensagem.innerHTML = msg_temp + msg_umidade;
-
-        }
+        div_resultado.innerHTML = `
+            Valor inicial do barril: R$ ${valor_inicial.toFixed(2)} <br>
+            <br>
+            Sem sistema:<br>
+            Volume final: ${volume_sem.toFixed(2)} L <br>
+            Valor final: R$ ${valor_sem.toFixed(2)} <br>
+            <br>
+            Com sistema (15% menos evaporação):<br>
+            Volume final: ${volume_com.toFixed(2)} L <br>
+            Valor final: R$ ${valor_com.toFixed(2)} <br>
+            <br>
+            Economia estimada: <strong>R$ ${economia.toFixed(2)}</strong>
+        `;
+    }
 
 
-    </script>
+</script>
 </body>
 
 </html>
