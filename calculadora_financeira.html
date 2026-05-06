@@ -215,6 +215,7 @@
         let valor_inicial = volume * valor;
 
         let economia = valor_com - valor_sem;
+        let volumeEco = volume_com - volume_sem;
 
         div_resultado.classList.remove("resultado-vazio");
 
@@ -229,7 +230,8 @@
             Volume final: ${volume_com.toFixed(2)} L <br>
             Valor final: R$ ${valor_com.toFixed(2)} <br>
             <br>
-            Economia estimada: <strong>R$ ${economia.toFixed(2)}</strong>
+            Economia estimada: <strong>R$ ${economia.toFixed(2)}</strong> <br>
+            Volume economizado estimado: <strong> ${volumeEco.toFixed(2)}</strong>
         `;
     }
 
